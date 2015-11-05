@@ -13,7 +13,7 @@ module Rack
       app = @app.call(env)
       after = ObjectSpace.count_objects({})
       after.each { |k,v| after[k] = v - before[k] }
-      @@logger.info %(#{LABEL} #{env["REQUEST_METHOD"]} #{env["PATH_INFO"]} Object increase #{after})
+      @@logger.info %(#{LABEL} #{env["REQUEST_METHOD"]} #{env["PATH_INFO"]} #{after})
       GC.enable
       app
     end
