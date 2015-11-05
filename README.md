@@ -1,15 +1,13 @@
 # Rack::ObjectCounter
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/rack/object_counter`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Memory increase profiler for rack app.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'rack-object_counter'
+gem 'rack-object_counter', require: 'rack/object_counter'
 ```
 
 And then execute:
@@ -22,17 +20,28 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### rails
 
-## Development
+Write to config/initializers/object_counter.rb
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+```
+Rails.application.config.middleware.use Rack::ObjectCounter
+Rack::ObjectCounter.logger = Rails.logger
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+### rack app
+
+Write to config.ru
+
+```
+require 'logger'
+use Rack::ObjectCounter
+Rack::ObjectCounter.logger = Logger.new(STDOUT)
+```
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/rack-object_counter.
+Bug reports and pull requests are welcome on GitHub at https://github.com/yalab/rack-object_counter.
 
 
 ## License
