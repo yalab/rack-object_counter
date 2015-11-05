@@ -27,6 +27,7 @@ class Rack::ObjectCounterTest < Minitest::Test
   def setup
     @logger = Logger.new(STDOUT)
     ::Rack::ObjectCounter.logger = @logger
+    GC.start
   end
 
   def test_logging_normal
